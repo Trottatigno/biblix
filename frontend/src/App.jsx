@@ -1,8 +1,16 @@
+import Header from "./components/Header";
+import Footer from "./components/Footer";
+import AppRoutes from "./routes/Routes";
+
 function App() {
   return (
-    <>
-      <p className="test">this is a sample test</p>
-    </>
+    <div>
+      <Header />
+      <main>
+        <AppRoutes />
+      </main>
+      <Footer />
+    </div>
   );
 }
 
