@@ -13,6 +13,8 @@ const bookSchema = new mongoose.Schema(
     parution: {
       type: Number,
       required: true,
+      min: -3000,
+      max: new Date().getFullYear(),
     },
     resume: {
       type: String,

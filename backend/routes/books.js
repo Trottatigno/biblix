@@ -1,6 +1,6 @@
 import express from "express";
 const router = express.Router();
-import Book from "../models/book.js";
+import Book from "../models/Book.js";
 
 // create a new book
 router.post("/", async (req, res) => {
@@ -9,8 +9,7 @@ router.post("/", async (req, res) => {
       !req.body.titre ||
       !req.body.autheur ||
       !req.body.parution ||
-      !req.body.resume ||
-      !req.body.couverture
+      !req.body.resume
     ) {
       return res.status(400).send({
         message: "Veuillez remplir tous les champs",

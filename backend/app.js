@@ -2,6 +2,8 @@ import "dotenv/config";
 import express, { json } from "express";
 import mongoose from "mongoose";
 import books from "./routes/books.js";
+import favorites from "./routes/favorites.js";
+import reviews from "./routes/reviews.js";
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -9,11 +11,9 @@ const DB_URL = process.env.DB_URL;
 
 app.use(express.json());
 
-app.get("/", (req, res) => {
-  res.send("Hello");
-});
-
 app.use("/books", books);
+app.use("/favorites", favorites);
+app.use("/reviews", reviews);
 
 mongoose
   .connect(DB_URL)
