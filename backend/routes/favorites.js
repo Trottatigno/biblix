@@ -11,7 +11,7 @@ router.post("/", async (req, res) => {
         message: "l'ID est introuvable",
       });
     }
-    const favorite = await Favorite.create();
+    const favorite = await Favorite.create({ id });
     res.status(200).send(favorite);
   } catch (error) {
     console.log(error.message);

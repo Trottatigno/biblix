@@ -1,15 +1,13 @@
+import axios from "axios";
 import { useEffect, useState } from "react";
 import { MdFavoriteBorder, MdFavorite } from "react-icons/md";
 
-function AddFavorite() {
-  const [isFavorite, setIsFavorite] = useState(false);
+function AddFavorite({ id }) {
+  const [isFavorite, setIsFavorite] = useState();
 
   useEffect(() => {}, []);
 
-  function handleFavorite() {
-    setIsFavorite(!isFavorite ? true : false);
-    console.log(isFavorite);
-  }
+  function handleFavorite() {}
 
   return (
     <button
@@ -21,7 +19,7 @@ function AddFavorite() {
       ) : (
         <MdFavorite className="m-1" color="#FF69B4" />
       )}
-      Ajouter aux favoris
+      {!isFavorite ? "Ajouter aux favoris" : "Retirer des favoris"}
     </button>
   );
 }

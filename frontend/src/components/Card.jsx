@@ -12,7 +12,7 @@ function Card({ book }) {
         <p className="font-medium text-lg py-1">{book.year}</p>
         <p className="font-normal text-base py-1">{book.director}</p>
         <div className="flex justify-center py-1">
-          <AddFavorite />
+          <AddFavorite id={book.id} />
         </div>
       </div>
     </div>

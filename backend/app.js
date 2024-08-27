@@ -4,10 +4,18 @@ import mongoose from "mongoose";
 import books from "./routes/books.js";
 import favorites from "./routes/favorites.js";
 import reviews from "./routes/reviews.js";
+import cors from "cors";
 
 const app = express();
 const PORT = process.env.PORT || 5000;
 const DB_URL = process.env.DB_URL;
+
+app.use(
+  cors({
+    origin: "http://localhost:5173",
+    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+  })
+);
 
 app.use(express.json());
 

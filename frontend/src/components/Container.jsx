@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 
 function Container({ books }) {
   return (
-    <div className=" flex flex-wrap space-x-10 justify-center m-2 p-10">
+    <div className=" flex flex-wrap justify-center p-5">
       {books.map((book) => (
         <Card key={book.id} book={book} />
       ))}
