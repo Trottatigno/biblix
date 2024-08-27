@@ -1,4 +1,5 @@
 import AddFavorite from "./Button/AddFavorite";
+import PropTypes from "prop-types";
 
 function Card({ book }) {
   return (
@@ -17,5 +18,13 @@ function Card({ book }) {
     </div>
   );
 }
+
+Card.propTypes = {
+  book: PropTypes.shape({
+    title: PropTypes.string.isRequired,
+    year: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+    director: PropTypes.string.isRequired,
+  }).isRequired,
+};
 
 export default Card;
