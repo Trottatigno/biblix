@@ -1,14 +1,15 @@
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-
-import Librairie from "../pages/Librairie";
+import { Route, Routes } from "react-router-dom";
+import Librairie from "../pages/Librairie.jsx";
+import MesLivres from "../pages/MesLivres.jsx";
+import MesFavoris from "../pages/MesFavoris.jsx";
 
 const AppRoutes = () => {
   return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<Librairie />} />
-      </Routes>
-    </Router>
+    <Routes>
+      <Route path="/" element={<Librairie />} />
+      <Route path="/meslivres" element={<MesLivres />} />
+      <Route path="/mesfavoris" element={<MesFavoris />} />
+    </Routes>
   );
 };
 

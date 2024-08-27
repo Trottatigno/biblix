@@ -1,7 +1,6 @@
 function Footer() {
   return (
     <div>
-      <h1>Footer</h1>
       <ul>
         Footer Menu
         <li>submenu 1</li>
