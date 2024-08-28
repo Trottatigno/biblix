@@ -1,12 +1,13 @@
 import { useContext, useEffect, useState } from "react";
 import { MdFavoriteBorder, MdFavorite } from "react-icons/md";
+import PropTypes from "prop-types";
 import FavoritesContext from "../../contexts/FavoritesContext";
 
 function FavoriteBtn({ id }) {
   const { favorites, addFavorite, removeFavorite } =
     useContext(FavoritesContext);
 
-  const [isFavorite, setIsFavorite] = useState();
+  const [isFavorite, setIsFavorite] = useState(null);
 
   useEffect(() => {
     const found = favorites.some((book) => book.id === id);
@@ -35,5 +36,9 @@ function FavoriteBtn({ id }) {
     </button>
   );
 }
+
+FavoriteBtn.propTypes = {
+  id: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
+};
 
 export default FavoriteBtn;

@@ -1,4 +1,5 @@
 import axios from "axios";
+import PropTypes from "prop-types";
 import { createContext, useEffect, useState } from "react";
 
 const FavoritesContext = createContext({
@@ -11,7 +12,7 @@ const FavoritesContext = createContext({
 export function FavoritesProvider({ children }) {
   const [favorites, setFavorites] = useState([]);
 
-  // stocke tous les favoris dans la constante Favorites
+  // récupère tous les livre db et les stocke dans la constante favorites
   const fetchFavorite = async () => {
     try {
       const res = await axios.get("http://localhost:5000/favorites");
@@ -55,5 +56,9 @@ export function FavoritesProvider({ children }) {
     </FavoritesContext.Provider>
   );
 }
+
+FavoritesProvider.propTypes = {
+  children: PropTypes.node.isRequired,
+};
 
 export default FavoritesContext;

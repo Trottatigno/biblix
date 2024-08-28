@@ -9,7 +9,7 @@ function Librairie() {
     const fetchBooks = async () => {
       try {
         const res = await axios.get(
-          "https://freetestapi.com/api/v1/movies?limit=12"
+          "https://freetestapi.com/api/v1/books?limit=12"
         );
         setBooks(res.data);
       } catch (error) {

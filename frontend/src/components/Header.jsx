@@ -8,9 +8,9 @@ function Header() {
 
   return (
     <header className=" shadow-lg border- bg-gray-200 p-4 flex justify-between sticky top-0">
-      <div className="flex items-center">
+      <div className="max-w-40">
         <Link to={"/"}>
-          <img src={logo} alt="logo" className="h-20 w-auto"></img>
+          <img src={logo} alt="logo" className="h-auto w-auto"></img>
         </Link>
       </div>
       <nav className="flex text-xl font-medium items-center">
