@@ -16,15 +16,10 @@ function Librairie() {
         console.log(error);
       }
     };
-
     fetchBooks();
   }, []);
 
-  return (
-    <div>
-      <Container books={books} />
-    </div>
-  );
+  return <Container books={books} />;
 }
 
 export default Librairie;
