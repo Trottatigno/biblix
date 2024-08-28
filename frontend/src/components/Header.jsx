@@ -1,7 +1,11 @@
 import { Link } from "react-router-dom";
 import logo from "../assets/Logo-biblix.png";
+import FavoritesContext from "../contexts/FavoritesContext";
+import { useContext } from "react";
 
 function Header() {
+  const { favorites } = useContext(FavoritesContext);
+
   return (
     <header className=" shadow-lg border- bg-gray-200 p-4 flex justify-between sticky top-0">
       <div className="flex items-center">
@@ -23,7 +27,7 @@ function Header() {
           className=" hover:text-gray-700 border-l border-gray-300 px-4"
           to={"/mesfavoris"}
         >
-          Mes Favoris
+          Mes Favoris ({favorites.length})
         </Link>
       </nav>
     </header>
