@@ -30,7 +30,7 @@ function FavoriteBtn({ _id }) {
       {!isFavorite ? (
         <MdFavoriteBorder className="m-1" />
       ) : (
-        <MdFavorite className="m-1" />
+        <MdFavorite className="m-1 fill-pink-500" />
       )}
       {!isFavorite ? "Ajouter aux favoris" : "Supprimer des favoris"}
     </button>

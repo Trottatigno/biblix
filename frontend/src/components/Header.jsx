@@ -7,7 +7,7 @@ function Header() {
   const { favorites } = useContext(FavoritesContext);
 
   return (
-    <header className=" shadow-lg border- bg-gray-200 p-4 flex justify-between sticky top-0">
+    <header className=" shadow-lg border- bg-gray-200 p-4 flex justify-between sticky top-0 z-50">
       <div className="max-w-40">
         <Link to={"/"}>
           <img src={logo} alt="logo" className="h-auto w-auto"></img>
@@ -19,9 +19,9 @@ function Header() {
         </Link>
         <Link
           className=" hover:text-gray-700 border-l border-gray-300 px-4"
-          to={"/meslivres"}
+          to={"/mescreations"}
         >
-          Mes Livres
+          Mes Créations
         </Link>
         <Link
           className=" hover:text-gray-700 border-l border-gray-300 px-4"
