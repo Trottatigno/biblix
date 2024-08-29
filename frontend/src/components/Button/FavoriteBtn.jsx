@@ -38,7 +38,7 @@ function FavoriteBtn({ _id }) {
 }
 
 FavoriteBtn.propTypes = {
-  _id: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
+  _id: PropTypes.string.isRequired,
 };
 
 export default FavoriteBtn;

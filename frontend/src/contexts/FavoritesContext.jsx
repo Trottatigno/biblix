@@ -17,7 +17,6 @@ export function FavoritesProvider({ children }) {
     try {
       const res = await axios.get("http://localhost:5000/favorites");
       setFavorites(res.data);
-      console.log(res.data);
     } catch (error) {
       console.log("Erreur lors de la récupération des favoris", error);
     }

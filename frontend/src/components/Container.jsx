@@ -11,4 +11,17 @@ function Container({ books }) {
   );
 }
 
+Container.propTypes = {
+  books: PropTypes.arrayOf(
+    PropTypes.shape({
+      titre: PropTypes.string.isRequired,
+      auteur: PropTypes.string.isRequired,
+      parution: PropTypes.number.isRequired,
+      resume: PropTypes.string,
+      couverture: PropTypes.string.isRequired,
+      _id: PropTypes.string.isRequired,
+    })
+  ).isRequired,
+};
+
 export default Container;

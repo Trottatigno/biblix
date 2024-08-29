@@ -19,4 +19,15 @@ function Card({ book }) {
   );
 }
 
+Card.propTypes = {
+  book: PropTypes.shape({
+    titre: PropTypes.string.isRequired,
+    auteur: PropTypes.string.isRequired,
+    parution: PropTypes.number.isRequired,
+    resume: PropTypes.string,
+    couverture: PropTypes.string.isRequired,
+    _id: PropTypes.string.isRequired,
+  }).isRequired,
+};
+
 export default Card;
