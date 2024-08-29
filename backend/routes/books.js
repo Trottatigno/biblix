@@ -5,12 +5,7 @@ import Book from "../models/Book.js";
 // create a new book
 router.post("/", async (req, res) => {
   try {
-    if (
-      !req.body.titre ||
-      !req.body.autheur ||
-      !req.body.parution ||
-      !req.body.resume
-    ) {
+    if (!req.body.titre || !req.body.auteur || !req.body.parution) {
       return res.status(400).send({
         message: "Veuillez remplir tous les champs",
       });
@@ -18,7 +13,7 @@ router.post("/", async (req, res) => {
 
     const newBook = {
       titre: req.body.titre,
-      autheur: req.body.autheur,
+      auteur: req.body.auteur,
       parution: req.body.parution,
       resume: req.body.resume,
       couverture: req.body.couverture,
@@ -94,12 +89,12 @@ router.delete("/:id", async (req, res) => {
 router.put("/:id", async (req, res) => {
   try {
     const id = req.params.id;
-    const { titre, autheur, parution, resume, couverture } = req.body;
+    const { titre, auteur, parution, resume, couverture } = req.body;
     const updatedBook = await Book.findByIdAndUpdate(
       id,
       {
         titre,
-        autheur,
+        auteur,
         parution,
         resume,
         couverture,

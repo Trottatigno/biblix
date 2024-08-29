@@ -6,7 +6,7 @@ const bookSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    autheur: {
+    auteur: {
       type: String,
       required: true,
     },
@@ -18,11 +18,9 @@ const bookSchema = new mongoose.Schema(
     },
     resume: {
       type: String,
-      required: true,
     },
     couverture: {
-      data: Buffer,
-      contentType: String,
+      type: String,
     },
   },
   { timestamps: true }

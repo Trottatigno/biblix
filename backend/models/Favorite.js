@@ -2,8 +2,8 @@ import mongoose from "mongoose";
 
 const favoriteSchema = new mongoose.Schema(
   {
-    id: {
-      type: Number,
+    _id: {
+      type: String,
       required: true,
     },
   },

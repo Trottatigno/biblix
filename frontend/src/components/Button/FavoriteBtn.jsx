@@ -3,22 +3,22 @@ import { MdFavoriteBorder, MdFavorite } from "react-icons/md";
 import PropTypes from "prop-types";
 import FavoritesContext from "../../contexts/FavoritesContext";
 
-function FavoriteBtn({ id }) {
+function FavoriteBtn({ _id }) {
   const { favorites, addFavorite, removeFavorite } =
     useContext(FavoritesContext);
 
   const [isFavorite, setIsFavorite] = useState(null);
 
   useEffect(() => {
-    const found = favorites.some((book) => book.id === id);
+    const found = favorites.some((book) => book._id === _id);
     setIsFavorite(found);
-  }, [favorites, id]);
+  }, [favorites, _id]);
 
   function handleClick() {
     if (!isFavorite) {
-      addFavorite(id);
+      addFavorite(_id);
     } else {
-      removeFavorite(id);
+      removeFavorite(_id);
     }
   }
 
@@ -38,7 +38,7 @@ function FavoriteBtn({ id }) {
 }
 
 FavoriteBtn.propTypes = {
-  id: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
+  _id: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
 };
 
 export default FavoriteBtn;

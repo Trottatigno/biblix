@@ -8,9 +8,7 @@ function Librairie() {
   useEffect(() => {
     const fetchBooks = async () => {
       try {
-        const res = await axios.get(
-          "https://freetestapi.com/api/v1/books?limit=12"
-        );
+        const res = await axios.get("http://localhost:5000/books");
         setBooks(res.data);
       } catch (error) {
         console.log(error);

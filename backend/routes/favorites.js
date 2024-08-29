@@ -5,13 +5,13 @@ import Favorite from "../models/Favorite.js";
 //add favorite
 router.post("/", async (req, res) => {
   try {
-    const { id } = req.body;
-    if (!id) {
+    const { _id } = req.body;
+    if (!_id) {
       return res.status(400).send({
         message: "l'ID est introuvable",
       });
     }
-    const result = await Favorite.create({ id });
+    const result = await Favorite.create({ _id });
     res.status(200).send(result);
   } catch (error) {
     console.log(error.message);
@@ -36,7 +36,7 @@ router.get("/", async (req, res) => {
 router.delete("/:id", async (req, res) => {
   try {
     const id = req.params.id;
-    const result = await Favorite.deleteMany({ id: id });
+    const result = await Favorite.findByIdAndDelete(id);
     if (result.deletedCount === 0) {
       return res.status(404).send({ message: "L'ID est introuvable" });
     }

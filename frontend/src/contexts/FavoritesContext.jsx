@@ -17,15 +17,16 @@ export function FavoritesProvider({ children }) {
     try {
       const res = await axios.get("http://localhost:5000/favorites");
       setFavorites(res.data);
+      console.log(res.data);
     } catch (error) {
       console.log("Erreur lors de la récupération des favoris", error);
     }
   };
 
   // ajoute un livre des favoris
-  const addFavorite = async (id) => {
+  const addFavorite = async (_id) => {
     try {
-      const res = await axios.post("http://localhost:5000/favorites", { id });
+      const res = await axios.post("http://localhost:5000/favorites", { _id });
       setFavorites((prevFavorites) => [...prevFavorites, res.data]);
     } catch (error) {
       console.log("Erreur lors de l'ajout aux favoris'", error);
@@ -33,11 +34,11 @@ export function FavoritesProvider({ children }) {
   };
 
   // supprime un livre des favoris
-  const removeFavorite = async (id) => {
+  const removeFavorite = async (_id) => {
     try {
-      await axios.delete(`http://localhost:5000/favorites/${id}`);
+      await axios.delete(`http://localhost:5000/favorites/${_id}`);
       setFavorites((prevFavorites) =>
-        prevFavorites.filter((favorite) => favorite.id !== id)
+        prevFavorites.filter((favorite) => favorite._id !== _id)
       );
     } catch (error) {
       console.log(`erreur lors de la suppresion des favoris`, { error });
