@@ -1,5 +1,7 @@
 import { useState } from "react";
 import FavoriteBtn from "./Button/FavoriteBtn";
+import Bookinfo from "./Bookinfo";
+import Reviews from "./Reviews";
 import PropTypes from "prop-types";
 import Modal from "./Modal";
 
@@ -14,7 +16,7 @@ function Card({ book }) {
       <div className="bg-gray-200 rounded-lg p-3 m-3 w-60 transform transition-transform duration-300 hover:scale-105">
         <div className="justify-center">
           <img
-            src={`../public/${book.couverture}`}
+            src={`${book.couverture}`}
             alt="Couverture"
             onClick={openModal}
           />
@@ -28,7 +30,11 @@ function Card({ book }) {
           </div>
         </div>
       </div>
-      <Modal openModal={isModalOpen} closeModal={closeModal} book={book} />
+      <Modal openModal={isModalOpen} closeModal={closeModal}>
+        <Bookinfo book={book} />
+        <FavoriteBtn _id={book._id} />
+        <Reviews />
+      </Modal>
     </div>
   );
 }

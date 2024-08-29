@@ -5,14 +5,14 @@ import Review from "../models/Review.js";
 // Ajoute une review
 router.post("/", async (req, res) => {
   try {
-    const { id, rating, comment } = req.body;
-    if (!id || !rating || !comment) {
+    const { rating, comment, relatedBook } = req.body;
+    if (!rating || !comment || !relatedBook) {
       return res
         .status(400)
         .send({ message: "Veuillez remplir tous les champs" });
     }
-    const review = await Review.create({ id, rating, comment });
-    res.status(201).send({ review });
+    const result = await Review.create({ rating, comment, relatedBook });
+    res.status(201).send({ result });
   } catch (error) {
     console.log(error.message);
     res.status(500).send({ message: error.message });

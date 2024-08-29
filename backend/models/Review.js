@@ -2,10 +2,6 @@ import mongoose from "mongoose";
 
 const reviewSchema = new mongoose.Schema(
   {
-    id: {
-      type: Number,
-      required: true,
-    },
     rating: {
       type: Number,
       required: true,
@@ -13,6 +9,10 @@ const reviewSchema = new mongoose.Schema(
       max: 5,
     },
     comment: {
+      type: String,
+      required: true,
+    },
+    relatedBook: {
       type: String,
       required: true,
     },
