@@ -19,10 +19,25 @@ router.post("/", async (req, res) => {
   }
 });
 
-// Affiche toutes les reviews pour un livre
+// Affiche toutes les reviews
 router.get("/", async (req, res) => {
   try {
     const reviews = await Review.find();
+    res.status(200).send(reviews);
+  } catch (error) {
+    console.log(error.message);
+    res.status(500).send({ message: error.message });
+  }
+});
+
+// Affiche les reviews d'une livre
+router.get("/:relatedBook", async (req, res) => {
+  try {
+    const relatedBook = req.params.relatedBook;
+    const reviews = await Review.find({ relatedBook });
+    if (!reviews) {
+      res.status(404).send({ message: "Aucune review n'a été trouvée" });
+    }
     res.status(200).send(reviews);
   } catch (error) {
     console.log(error.message);

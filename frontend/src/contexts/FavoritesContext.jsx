@@ -6,7 +6,6 @@ const FavoritesContext = createContext({
   favorites: [],
   addFavorite: () => {},
   removeFavorite: () => {},
-  fetchFavorite: () => {},
 });
 
 export function FavoritesProvider({ children }) {

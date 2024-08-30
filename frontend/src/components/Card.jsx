@@ -1,9 +1,10 @@
 import { useState } from "react";
 import FavoriteBtn from "./Button/FavoriteBtn";
 import Bookinfo from "./Bookinfo";
-import Reviews from "./Reviews";
+import ReviewForm from "./Reviews/ReviewsForm";
 import PropTypes from "prop-types";
 import Modal from "./Modal";
+import ReviewDisplay from "./Reviews/ReviewDisplay";
 
 function Card({ book }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -32,8 +33,8 @@ function Card({ book }) {
       </div>
       <Modal openModal={isModalOpen} closeModal={closeModal}>
         <Bookinfo book={book} />
-        <FavoriteBtn _id={book._id} />
-        <Reviews />
+        <ReviewForm relatedBook={book._id} />
+        <ReviewDisplay relatedBook={book._id} />
       </Modal>
     </div>
   );
