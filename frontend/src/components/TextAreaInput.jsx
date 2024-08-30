@@ -4,7 +4,7 @@ function TextAreaInput({ comment, setComment }) {
   }
 
   return (
-    <div className="py-3">
+    <div className="pt-3">
       <textarea
         value={comment}
         onChange={(event) => handleCommentChange(event)}

@@ -2,7 +2,6 @@ import CommentDisplay from "./CommentDisplay";
 import RatingDisplay from "./RatingDisplay";
 import ReviewsContext from "../../contexts/ReviewsContext";
 import { useContext, useEffect } from "react";
-import axios from "axios";
 
 function ReviewDisplay({ relatedBook }) {
   const { reviews, fetchReviews } = useContext(ReviewsContext);
@@ -16,10 +15,12 @@ function ReviewDisplay({ relatedBook }) {
   return (
     <div className="my-3">
       {reviews.map((review) => (
-        <div key={review._id} className="flex">
-          <RatingDisplay />
-          <p className="ml-2">le 11/01/2001</p>
-          <CommentDisplay />
+        <div key={review._id} className="my-5 border-t border-gray-400 pt-5">
+          <RatingDisplay
+            rating={review.rating}
+            date={new Date(review.createdAt).toLocaleDateString()}
+          />
+          <CommentDisplay comment={review.comment} />
         </div>
       ))}
     </div>

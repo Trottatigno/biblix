@@ -4,9 +4,9 @@ function StatusTextSubmit({ message, status }) {
   function handleCurrentStatus(status) {
     switch (status) {
       case "success":
-        return "bg-green-100 text-green-800 border-green-300";
+        return "text-green-600";
       case "error":
-        return "bg-red-100 text-red-800 border-red-300";
+        return "text-red-600";
 
       default:
         return "";
