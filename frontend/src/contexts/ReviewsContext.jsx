@@ -1,14 +1,16 @@
 import axios from "axios";
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 
 const ReviewsContext = createContext({
   reviews: [],
   setReviews: () => {},
   fetchReviews: () => {},
+  average: 0,
 });
 
 export function ReviewsProvider({ children }) {
   const [reviews, setReviews] = useState([]);
+  const [average, setAverage] = useState(0);
 
   const fetchReviews = async (relatedBook) => {
     try {
@@ -21,8 +23,25 @@ export function ReviewsProvider({ children }) {
     }
   };
 
+  const calculateRatingAverage = () => {
+    const ratings = reviews.map((review) => review.rating);
+    const sum = ratings.reduce(
+      (accumulator, currentValue) => accumulator + currentValue,
+      0
+    );
+    const averageRating = ratings.length ? sum / ratings.length : 0;
+    return parseFloat(averageRating.toFixed(1));
+  };
+
+  useEffect(() => {
+    const avg = calculateRatingAverage();
+    setAverage(avg);
+  }, [reviews]);
+
   return (
-    <ReviewsContext.Provider value={{ reviews, setReviews, fetchReviews }}>
+    <ReviewsContext.Provider
+      value={{ reviews, setReviews, fetchReviews, average }}
+    >
       {children}
     </ReviewsContext.Provider>
   );

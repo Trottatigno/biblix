@@ -1,4 +1,5 @@
 import FavoriteBtn from "./Button/FavoriteBtn";
+import AverageRatings from "./Reviews/AverageRatings";
 
 function Bookinfo({ book }) {
   return (
@@ -8,6 +9,7 @@ function Bookinfo({ book }) {
       </div>
       <div className="pl-3">
         <h2 className="font-bold text-2xl py-1">{book.titre}</h2>
+        <AverageRatings />
         <p className="font-medium text-lg py-1">{book.parution}</p>
         <p className="font-normal text-base py-1">{book.resume}</p>
         <p className="font-normal text-base py-1 pb-5">{book.auteur}</p>

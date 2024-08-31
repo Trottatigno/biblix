@@ -5,6 +5,7 @@ import ReviewForm from "./Reviews/ReviewsForm";
 import PropTypes from "prop-types";
 import Modal from "./Modal";
 import ReviewDisplay from "./Reviews/ReviewDisplay";
+import AverageRatings from "./Reviews/AverageRatings";
 
 function Card({ book }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -24,6 +25,9 @@ function Card({ book }) {
         </div>
         <div className="flex flex-col text-center">
           <h2 className="font-bold text-2xl py-1">{book.titre}</h2>
+          <div className="flex justify-center">
+            <AverageRatings />
+          </div>
           <p className="font-medium text-lg py-1">{book.parution}</p>
           <p className="font-normal text-base py-1">{book.auteur}</p>
           <div className="flex justify-center py-1">
