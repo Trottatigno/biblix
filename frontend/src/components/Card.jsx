@@ -16,13 +16,14 @@ function Card({ book }) {
 
   return (
     <ReviewsProvider relatedBook={book._id}>
-      <div>
-        <div className="bg-gray-200 rounded-lg p-3 m-3 w-60 transform transition-transform duration-300 hover:scale-105">
-          <div className="justify-center">
+      <div className="flex">
+        <div className="flex flex-col bg-gray-200 rounded-lg p-3 m-3 w-64 h-full transform transition-transform duration-300 hover:scale-105">
+          <div className="flex justify-center mb-3">
             <img
               src={`${book.couverture}`}
               alt="Couverture"
               onClick={openModal}
+              className="w-full h-72 object-cover rounded-lg cursor-pointer"
             />
           </div>
           <div className="flex flex-col text-center">

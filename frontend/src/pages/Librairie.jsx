@@ -1,23 +1,17 @@
-import { useEffect, useState } from "react";
-import Container from "../components/Container";
-import axios from "axios";
+import { useContext } from "react";
+import Card from "../components/Card";
+import BooksContext from "../contexts/BooksContext";
 
 function Librairie() {
-  const [books, setBooks] = useState([]);
+  const { books } = useContext(BooksContext);
 
-  useEffect(() => {
-    const fetchBooks = async () => {
-      try {
-        const res = await axios.get("http://localhost:5000/books");
-        setBooks(res.data);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    fetchBooks();
-  }, []);
-
-  return <Container books={books} />;
+  return (
+    <div className="flex flex-wrap gap-4 p-4">
+      {books.map((book) => (
+        <Card key={book._id} book={book} />
+      ))}
+    </div>
+  );
 }
 
 export default Librairie;
