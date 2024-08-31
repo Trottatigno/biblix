@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import axios from "axios";
 import { createContext, useEffect, useState } from "react";
 
@@ -8,7 +9,7 @@ const ReviewsContext = createContext({
   average: 0,
 });
 
-export function ReviewsProvider({ children }) {
+export function ReviewsProvider({ children, relatedBook }) {
   const [reviews, setReviews] = useState([]);
   const [average, setAverage] = useState(0);
 
@@ -34,6 +35,12 @@ export function ReviewsProvider({ children }) {
   };
 
   useEffect(() => {
+    if (relatedBook) {
+      fetchReviews(relatedBook);
+    }
+  }, [relatedBook, reviews]);
+
+  useEffect(() => {
     const avg = calculateRatingAverage();
     setAverage(avg);
   }, [reviews]);
@@ -46,5 +53,10 @@ export function ReviewsProvider({ children }) {
     </ReviewsContext.Provider>
   );
 }
+
+ReviewsProvider.propTypes = {
+  children: PropTypes.node.isRequired,
+  relatedBook: PropTypes.string.isRequired,
+};
 
 export default ReviewsContext;

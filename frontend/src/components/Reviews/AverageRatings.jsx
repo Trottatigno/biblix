@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import { useContext } from "react";
 import ReviewsContext from "../../contexts/ReviewsContext";
 import { FaStar } from "react-icons/fa";
 

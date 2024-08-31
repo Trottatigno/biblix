@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import { FaRegStar } from "react-icons/fa";
 import { FaStar } from "react-icons/fa";
 
@@ -27,5 +28,10 @@ function RatingSelector({ rating, setRating }) {
     </div>
   );
 }
+
+RatingSelector.propTypes = {
+  rating: PropTypes.number.isRequired,
+  setRating: PropTypes.func.isRequired,
+};
 
 export default RatingSelector;

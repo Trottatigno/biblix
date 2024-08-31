@@ -4,6 +4,7 @@ import TextAreaInput from "../TextAreaInput";
 import RatingSelector from "./RatingSelector";
 import axios from "axios";
 import StatusTextSubmit from "../StatusTextSubmit";
+import PropTypes from "prop-types";
 
 function ReviewsForm({ relatedBook }) {
   const [rating, setRating] = useState(1);
@@ -50,5 +51,9 @@ function ReviewsForm({ relatedBook }) {
     </form>
   );
 }
+
+ReviewsForm.propTypes = {
+  relatedBook: PropTypes.string.isRequired,
+};
 
 export default ReviewsForm;

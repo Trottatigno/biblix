@@ -1,16 +1,10 @@
 import CommentDisplay from "./CommentDisplay";
 import RatingDisplay from "./RatingDisplay";
 import ReviewsContext from "../../contexts/ReviewsContext";
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
 
-function ReviewDisplay({ relatedBook }) {
-  const { reviews, fetchReviews } = useContext(ReviewsContext);
-
-  useEffect(() => {
-    if (relatedBook) {
-      fetchReviews(relatedBook);
-    }
-  }, [relatedBook, fetchReviews]);
+function ReviewDisplay() {
+  const { reviews } = useContext(ReviewsContext);
 
   return (
     <div className="my-3">

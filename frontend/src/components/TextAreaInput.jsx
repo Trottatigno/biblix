@@ -1,3 +1,5 @@
+import PropTypes from "prop-types";
+
 function TextAreaInput({ comment, setComment }) {
   function handleCommentChange(event) {
     setComment(event.target.value);
@@ -13,5 +15,10 @@ function TextAreaInput({ comment, setComment }) {
     </div>
   );
 }
+
+TextAreaInput.propTypes = {
+  comment: PropTypes.string.isRequired,
+  setComment: PropTypes.func.isRequired,
+};
 
 export default TextAreaInput;

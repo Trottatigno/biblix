@@ -1,3 +1,5 @@
+import PropTypes from "prop-types";
+
 function CommentDisplay({ comment }) {
   return (
     <div className="">
@@ -5,5 +7,9 @@ function CommentDisplay({ comment }) {
     </div>
   );
 }
+
+CommentDisplay.propTypes = {
+  comment: PropTypes.string.isRequired,
+};
 
 export default CommentDisplay;

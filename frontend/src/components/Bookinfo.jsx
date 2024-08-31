@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import FavoriteBtn from "./Button/FavoriteBtn";
 import AverageRatings from "./Reviews/AverageRatings";
 
@@ -18,5 +19,16 @@ function Bookinfo({ book }) {
     </div>
   );
 }
+
+Bookinfo.propTypes = {
+  book: PropTypes.shape({
+    titre: PropTypes.string.isRequired,
+    auteur: PropTypes.string.isRequired,
+    parution: PropTypes.number.isRequired,
+    resume: PropTypes.string,
+    couverture: PropTypes.string.isRequired,
+    _id: PropTypes.string.isRequired,
+  }).isRequired,
+};
 
 export default Bookinfo;

@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import { useEffect } from "react";
 import ExitBtn from "./Button/ExitBtn";
 
@@ -30,5 +31,11 @@ function Modal({ openModal, closeModal, children }) {
     return null;
   }
 }
+
+Modal.propTypes = {
+  openModal: PropTypes.bool.isRequired,
+  closeModal: PropTypes.func.isRequired,
+  children: PropTypes.node.isRequired,
+};
 
 export default Modal;

@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import { FaStar } from "react-icons/fa";
 
 function RatingDisplay({ date, rating }) {
@@ -12,5 +13,10 @@ function RatingDisplay({ date, rating }) {
     </div>
   );
 }
+
+RatingDisplay.propTypes = {
+  date: PropTypes.string.isRequired,
+  rating: PropTypes.number.isRequired,
+};
 
 export default RatingDisplay;
