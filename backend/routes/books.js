@@ -1,28 +1,49 @@
 import express from "express";
-const router = express.Router();
 import Book from "../models/Book.js";
+import multer from "multer";
+import path from "path";
+import { fileURLToPath } from "url";
+import { dirname } from "path";
 
-// create a new book
-router.post("/", async (req, res) => {
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
+const router = express.Router();
+
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    const uploadPath = path.join(__dirname, "../img/coverimages");
+    console.log(`Upload path: ${uploadPath}`);
+    cb(null, uploadPath);
+  },
+  filename: (req, file, cb) => {
+    cb(null, Date.now() + path.extname(file.originalname));
+  },
+});
+
+const upload = multer({ storage: storage });
+
+router.post("/", upload.single("couverture"), async (req, res) => {
   try {
     if (
       !req.body.titre ||
       !req.body.auteur ||
       !req.body.parution ||
-      !req.body.resume ||
-      !req.body.couverture
+      !req.body.resume
     ) {
       return res.status(400).send({
         message: "Veuillez remplir tous les champs",
       });
     }
 
+    const couvertureUrl = req.file ? `${req.file.filename}` : null;
+
     const newBook = {
       titre: req.body.titre,
       auteur: req.body.auteur,
       parution: req.body.parution,
       resume: req.body.resume,
-      couverture: req.body.couverture,
+      couverture: couvertureUrl,
     };
 
     const book = await Book.create(newBook);

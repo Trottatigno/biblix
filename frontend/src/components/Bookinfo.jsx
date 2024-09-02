@@ -6,7 +6,10 @@ function Bookinfo({ book }) {
   return (
     <div className="flex">
       <div className="flex-2 pr-3 border-r border-x-gray-400">
-        <img className="min-w-52" src={`../public/${book.couverture}`}></img>
+        <img
+          className="min-w-52"
+          src={`http://localhost:5000/coverimages/${book.couverture}`}
+        ></img>
       </div>
       <div className="pl-3">
         <h2 className="font-bold text-2xl py-1">{book.titre}</h2>

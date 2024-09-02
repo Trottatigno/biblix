@@ -28,7 +28,7 @@ function Card({ book }) {
         <div className="flex flex-col bg-gray-200 rounded-lg p-3 m-3 w-64 h-full transform transition-transform duration-300 hover:scale-105">
           <div className="flex justify-center mb-3">
             <img
-              src={`${book.couverture}`}
+              src={`http://localhost:5000/coverimages/${book.couverture}`}
               alt="Couverture"
               onClick={handleOpenModal}
               className="w-full h-72 object-cover rounded-lg cursor-pointer"
