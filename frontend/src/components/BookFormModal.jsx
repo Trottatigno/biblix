@@ -1,9 +1,10 @@
 import TextInput from "./TextInput";
 import SaveBookBtn from "./Button/SaveBookBtn";
-import SaveAndPublishBtn from "./Button/SaveAndPublishBookBtn";
 import { useContext, useState } from "react";
 import BooksContext from "../contexts/BooksContext";
 import StatusTextSubmit from "./StatusTextSubmit";
+import SuccessBtn from "./Button/SuccessBtn";
+import { useModal } from "../contexts/ModalContext";
 
 function BookFormModal() {
   const [titre, setTitre] = useState("");
@@ -11,6 +12,9 @@ function BookFormModal() {
   const [parution, setParution] = useState("");
   const [resume, setResume] = useState("");
   const [couverture, setCouverture] = useState(null);
+
+  //hook modal
+  const { closeModal } = useModal();
 
   //message status info
   const [message, setMessage] = useState("");
@@ -42,8 +46,7 @@ function BookFormModal() {
     formData.append("creation", true);
     try {
       await createBook(formData);
-      setStatus("success");
-      setMessage("Votre livre a bien été créé");
+      closeModal();
     } catch (error) {
       console.log(error);
       setStatus("error");
@@ -68,8 +71,7 @@ function BookFormModal() {
     formData.append("creation", true);
     try {
       await createBook(formData);
-      setStatus("success");
-      setMessage("Votre livre a bien été créé");
+      closeModal();
     } catch (error) {
       console.log(error);
       setStatus("error");
@@ -142,9 +144,9 @@ function BookFormModal() {
       </div>
       <div className="flex justify-end mt-2">
         <SaveBookBtn value={"Enregistrer"} saveBook={handleSaveBook} />
-        <SaveAndPublishBtn
+        <SuccessBtn
           value={"Enregistrer et publier"}
-          saveAndPublish={handleSaveAndPublish}
+          onClick={handleSaveAndPublish}
         />
       </div>
     </form>

@@ -3,7 +3,7 @@ import { MdFavoriteBorder, MdFavorite } from "react-icons/md";
 import PropTypes from "prop-types";
 import FavoritesContext from "../../contexts/FavoritesContext";
 
-function FavoriteBtn({ _id }) {
+function FavoriteBtn({ _id, btnDisplay }) {
   const { favorites, addFavorite, removeFavorite } =
     useContext(FavoritesContext);
 
@@ -24,6 +24,7 @@ function FavoriteBtn({ _id }) {
 
   return (
     <button
+      style={{ display: btnDisplay }}
       className="border-2 border-gray-400 rounded-full flex px-3 py-2"
       onClick={handleClick}
     >

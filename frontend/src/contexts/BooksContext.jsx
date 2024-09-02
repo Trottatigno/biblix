@@ -6,6 +6,8 @@ const BooksContext = createContext({
   books: [],
   fetchBooks: () => {},
   createBook: () => {},
+  deleteBook: () => {},
+  publishBook: () => {},
 });
 
 export function BooksProvider({ children }) {
@@ -35,8 +37,38 @@ export function BooksProvider({ children }) {
     }
   };
 
+  //supprime un livre
+  const deleteBook = async (_id) => {
+    try {
+      await axios.delete(`http://localhost:5000/books/${_id}`);
+      setBooks((prevBooks) => prevBooks.filter((book) => book._id !== _id));
+    } catch (error) {
+      console.log(`Erreur lors de la suppression du livre ${error}`);
+    }
+  };
+
+  //publie un created book (published === true)
+  const publishBook = async (_id) => {
+    try {
+      await axios.put(`http://localhost:5000/books/${_id}/publish`, {
+        published: true,
+      });
+      setBooks((prevBooks) =>
+        prevBooks.map((book) =>
+          book._id === _id ? { ...book, published: true } : book
+        )
+      );
+    } catch (error) {
+      console.log(
+        `Il y a eu un problème lors de la publication du livre : ${error}`
+      );
+    }
+  };
+
   return (
-    <BooksContext.Provider value={{ books, createBook }}>
+    <BooksContext.Provider
+      value={{ books, createBook, deleteBook, publishBook }}
+    >
       {children}
     </BooksContext.Provider>
   );

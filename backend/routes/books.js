@@ -146,4 +146,37 @@ router.put("/:id", async (req, res) => {
   }
 });
 
+// modifie le champ "published" d'un created book
+router.put("/:id/publish", async (req, res) => {
+  try {
+    const id = req.params.id;
+    const { published } = req.body;
+
+    if (published === undefined) {
+      return res.status(400).send({
+        message: "Le champ 'published' est requis.",
+      });
+    }
+
+    const updatedBook = await Book.findByIdAndUpdate(
+      id,
+      { published },
+      { new: true, runValidators: true }
+    );
+
+    if (!updatedBook) {
+      return res.status(404).send({
+        message: "Le livre n'a pas été trouvé dans la base de données",
+      });
+    }
+
+    res.status(200).send(updatedBook);
+  } catch (error) {
+    console.log(error.message);
+    res.status(500).send({
+      message: error.message,
+    });
+  }
+});
+
 export default router;
