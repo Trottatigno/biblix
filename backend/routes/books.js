@@ -13,7 +13,6 @@ const router = express.Router();
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
     const uploadPath = path.join(__dirname, "../img/coverimages");
-    console.log(`Upload path: ${uploadPath}`);
     cb(null, uploadPath);
   },
   filename: (req, file, cb) => {
@@ -29,7 +28,8 @@ router.post("/", upload.single("couverture"), async (req, res) => {
       !req.body.titre ||
       !req.body.auteur ||
       !req.body.parution ||
-      !req.body.resume
+      !req.body.resume ||
+      !req.file
     ) {
       return res.status(400).send({
         message: "Veuillez remplir tous les champs",
@@ -44,6 +44,8 @@ router.post("/", upload.single("couverture"), async (req, res) => {
       parution: req.body.parution,
       resume: req.body.resume,
       couverture: couvertureUrl,
+      published: req.body.published === "true",
+      creation: req.body.creation === "true",
     };
 
     const book = await Book.create(newBook);

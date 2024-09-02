@@ -16,12 +16,15 @@ function BookFormModal() {
   const [message, setMessage] = useState("");
   const [status, setStatus] = useState("");
 
+  //récupération du .POST pour créer livre
   const { createBook } = useContext(BooksContext);
 
+  //input file (couverture livre)
   const handleFileChange = (e) => {
     setCouverture(e.target.files[0]);
   };
 
+  // enregistre le livre dans la DB (published = false)
   const handleSaveBook = async (event) => {
     event.preventDefault();
     if (!titre || !auteur || !parution || !resume || !couverture) {
@@ -35,6 +38,8 @@ function BookFormModal() {
     formData.append("parution", parution);
     formData.append("resume", resume);
     formData.append("couverture", couverture);
+    formData.append("published", false);
+    formData.append("creation", true);
     try {
       await createBook(formData);
       setStatus("success");
@@ -45,10 +50,31 @@ function BookFormModal() {
       setMessage("il y a eu un problème avec le soumission du formulaire");
     }
   };
-
-  const saveAndPublish = (event) => {
+  // enregistre le livre dans le DB (published = true)
+  const handleSaveAndPublish = async (event) => {
     event.preventDefault();
-    //ici le context pour post et published = true
+    if (!titre || !auteur || !parution || !resume || !couverture) {
+      setStatus("error");
+      setMessage("Veuillez remplir tous les champs");
+      return;
+    }
+    const formData = new FormData();
+    formData.append("titre", titre);
+    formData.append("auteur", auteur);
+    formData.append("parution", parution);
+    formData.append("resume", resume);
+    formData.append("couverture", couverture);
+    formData.append("published", true);
+    formData.append("creation", true);
+    try {
+      await createBook(formData);
+      setStatus("success");
+      setMessage("Votre livre a bien été créé");
+    } catch (error) {
+      console.log(error);
+      setStatus("error");
+      setMessage("il y a eu un problème avec le soumission du formulaire");
+    }
   };
 
   return (
@@ -82,7 +108,7 @@ function BookFormModal() {
       </div>
       <div className="my-2">
         <label className="font-bold" htmlFor="parution">
-          *Parution : *
+          Parution : *
         </label>
         <TextInput
           value={parution}
@@ -115,8 +141,11 @@ function BookFormModal() {
         <StatusTextSubmit status={status} message={message} />
       </div>
       <div className="flex justify-end mt-2">
-        <SaveBookBtn saveBook={handleSaveBook} />
-        <SaveAndPublishBtn saveAndPublish={saveAndPublish} />
+        <SaveBookBtn value={"Enregistrer"} saveBook={handleSaveBook} />
+        <SaveAndPublishBtn
+          value={"Enregistrer et publier"}
+          saveAndPublish={handleSaveAndPublish}
+        />
       </div>
     </form>
   );

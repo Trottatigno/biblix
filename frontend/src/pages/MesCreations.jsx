@@ -8,8 +8,6 @@ function MesCreations() {
 
   const createdBooks = books.filter((book) => book.creation === true);
 
-  console.log(createdBooks);
-
   return (
     <div className="flex m-3">
       <ContentCard>
