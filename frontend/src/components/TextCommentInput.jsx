@@ -11,6 +11,7 @@ function TextAreaInput({ comment, setComment }) {
         value={comment}
         onChange={(event) => handleCommentChange(event)}
         className="bg-gray-200 min-w-full min-h-28 border border-gray-400 rounded-xl py-3 px-2"
+        placeholder="Entrez votre commentaire..."
       ></textarea>
     </div>
   );

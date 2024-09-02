@@ -7,7 +7,7 @@ function FavoriteBtn({ _id }) {
   const { favorites, addFavorite, removeFavorite } =
     useContext(FavoritesContext);
 
-  const [isFavorite, setIsFavorite] = useState(null);
+  const [isFavorite, setIsFavorite] = useState(false);
 
   useEffect(() => {
     const found = favorites.some((book) => book._id === _id);

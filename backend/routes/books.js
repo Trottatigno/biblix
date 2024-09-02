@@ -5,7 +5,13 @@ import Book from "../models/Book.js";
 // create a new book
 router.post("/", async (req, res) => {
   try {
-    if (!req.body.titre || !req.body.auteur || !req.body.parution) {
+    if (
+      !req.body.titre ||
+      !req.body.auteur ||
+      !req.body.parution ||
+      !req.body.resume ||
+      !req.body.couverture
+    ) {
       return res.status(400).send({
         message: "Veuillez remplir tous les champs",
       });
@@ -29,7 +35,7 @@ router.post("/", async (req, res) => {
   }
 });
 
-//display all created books
+//display all books
 router.get("/", async (req, res) => {
   try {
     const books = await Book.find({});
@@ -42,7 +48,7 @@ router.get("/", async (req, res) => {
   }
 });
 
-//display a created book
+//display a book
 router.get("/:id", async (req, res) => {
   try {
     const id = req.params.id;
@@ -62,7 +68,7 @@ router.get("/:id", async (req, res) => {
   }
 });
 
-//delete a created book
+//delete a book
 router.delete("/:id", async (req, res) => {
   try {
     const id = req.params.id;

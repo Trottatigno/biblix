@@ -1,6 +1,6 @@
 import { useState } from "react";
 import SubmitFormBtn from "../Button/SubmitFormBtn";
-import TextAreaInput from "../TextAreaInput";
+import TextCommentInput from "../TextCommentInput";
 import RatingSelector from "./RatingSelector";
 import axios from "axios";
 import StatusTextSubmit from "../StatusTextSubmit";
@@ -45,7 +45,7 @@ function ReviewsForm({ relatedBook }) {
         </h1>
       </div>
       <RatingSelector rating={rating} setRating={setRating} />
-      <TextAreaInput comment={comment} setComment={setComment} />
+      <TextCommentInput comment={comment} setComment={setComment} />
       <StatusTextSubmit message={message} status={status} />
       <SubmitFormBtn submitReview={submitReview} />
     </form>

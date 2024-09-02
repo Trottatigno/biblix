@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import BooksContext from "../contexts/BooksContext";
 import FavoritesContext from "../contexts/FavoritesContext";
-import Card from "../components/Card";
+import BookCard from "../components/BookCard";
 
 function MesFavoris() {
   const { books } = useContext(BooksContext);
@@ -14,7 +14,7 @@ function MesFavoris() {
   return (
     <div className="flex flex-wrap gap-4 p-4">
       {favoriteBooks.map((book) => (
-        <Card book={book} key={book._id} />
+        <BookCard book={book} key={book._id} />
       ))}
     </div>
   );

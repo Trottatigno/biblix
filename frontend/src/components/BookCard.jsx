@@ -1,18 +1,26 @@
-import { useState } from "react";
 import FavoriteBtn from "./Button/FavoriteBtn";
 import Bookinfo from "./Bookinfo";
 import ReviewForm from "./Reviews/ReviewsForm";
 import PropTypes from "prop-types";
-import Modal from "./Modal";
 import ReviewDisplay from "./Reviews/ReviewDisplay";
 import AverageRatings from "./Reviews/AverageRatings";
 import { ReviewsProvider } from "../contexts/ReviewsContext";
+import { useModal } from "../contexts/ModalContext";
 
 function Card({ book }) {
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const { openModal } = useModal();
 
-  const openModal = () => setIsModalOpen(true);
-  const closeModal = () => setIsModalOpen(false);
+  const handleOpenModal = () => {
+    openModal(
+      <div>
+        <ReviewsProvider relatedBook={book._id}>
+          <Bookinfo book={book} />
+          <ReviewForm relatedBook={book._id} />
+          <ReviewDisplay relatedBook={book._id} />
+        </ReviewsProvider>
+      </div>
+    );
+  };
 
   return (
     <ReviewsProvider relatedBook={book._id}>
@@ -22,7 +30,7 @@ function Card({ book }) {
             <img
               src={`${book.couverture}`}
               alt="Couverture"
-              onClick={openModal}
+              onClick={handleOpenModal}
               className="w-full h-72 object-cover rounded-lg cursor-pointer"
             />
           </div>
@@ -38,11 +46,6 @@ function Card({ book }) {
             </div>
           </div>
         </div>
-        <Modal openModal={isModalOpen} closeModal={closeModal}>
-          <Bookinfo book={book} />
-          <ReviewForm relatedBook={book._id} />
-          <ReviewDisplay relatedBook={book._id} />
-        </Modal>
       </div>
     </ReviewsProvider>
   );

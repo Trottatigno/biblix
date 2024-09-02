@@ -22,6 +22,14 @@ const bookSchema = new mongoose.Schema(
     couverture: {
       type: String,
     },
+    creation: {
+      type: Boolean,
+      default: true,
+    },
+    published: {
+      type: Boolean,
+      default: false,
+    },
   },
   { timestamps: true }
 );

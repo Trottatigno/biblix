@@ -38,7 +38,7 @@ export function ReviewsProvider({ children, relatedBook }) {
     if (relatedBook) {
       fetchReviews(relatedBook);
     }
-  }, [relatedBook, reviews]);
+  }, [relatedBook]);
 
   useEffect(() => {
     const avg = calculateRatingAverage();

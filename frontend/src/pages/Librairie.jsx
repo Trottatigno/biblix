@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import Card from "../components/Card";
+import BookCard from "../components/BookCard";
 import BooksContext from "../contexts/BooksContext";
 
 function Librairie() {
@@ -8,7 +8,7 @@ function Librairie() {
   return (
     <div className="flex flex-wrap gap-4 p-4">
       {books.map((book) => (
-        <Card key={book._id} book={book} />
+        <BookCard key={book._id} book={book} />
       ))}
     </div>
   );
