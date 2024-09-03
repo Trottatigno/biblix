@@ -166,7 +166,7 @@ router.put("/:id", upload.single("couverture"), async (req, res) => {
         parution,
         resume,
         couverture: req.file ? req.file.filename : currentBook.couverture, // Conserve l'ancienne image si aucune nouvelle image est téléchargée
-        published,
+        published: published !== undefined ? published : currentBook.published, // Conserve l'état actuel de 'published' si non défini
       },
       { new: true, runValidators: true }
     );

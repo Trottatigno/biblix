@@ -11,11 +11,14 @@ import { useModal } from "../contexts/ModalContext";
 import Bookinfo from "../components/Bookinfo";
 import StatusTextSubmit from "../components/StatusTextSubmit";
 import BookFormModal from "../components/BookFormModal";
+import FavoritesContext from "../contexts/FavoritesContext";
+import ReviewDisplay from "../components/Reviews/ReviewDisplay";
 
 function MesCreations() {
   const { books, deleteBook, publishBook, unPublishBook } =
     useContext(BooksContext);
   const { openModal, closeModal } = useModal();
+  const { removeFavorite } = useContext(FavoritesContext);
 
   const createdBooks = books.filter((book) => book.creation === true);
 
@@ -37,6 +40,7 @@ function MesCreations() {
             onClick={async () => {
               try {
                 await deleteBook(book._id);
+                await removeFavorite(book._id);
                 closeModal();
               } catch (error) {
                 console.error(
@@ -52,7 +56,12 @@ function MesCreations() {
   };
 
   const showBookInfo = (book) => {
-    openModal(<Bookinfo book={book} />);
+    openModal(
+      <div>
+        <Bookinfo book={book} />
+        <ReviewDisplay />
+      </div>
+    );
   };
 
   const handleEditBtn = (book) => {
@@ -97,7 +106,7 @@ function MesCreations() {
             ></EditBookBtn>
             <SuccessBtn
               onClick={() => handlePublishBtn(book)}
-              value={"Publier"}
+              value={book.published ? "Dépublier" : "Publier"}
             ></SuccessBtn>
           </div>
           <div className="mt-2">

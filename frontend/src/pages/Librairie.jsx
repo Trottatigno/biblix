@@ -17,7 +17,7 @@ function Librairie() {
         <ReviewsProvider relatedBook={book._id}>
           <Bookinfo book={book} />
           <ReviewsForm relatedBook={book._id} />
-          <ReviewDisplay relatedBook={book._id} />
+          <ReviewDisplay />
         </ReviewsProvider>
       </div>
     );
