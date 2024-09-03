@@ -6,12 +6,12 @@ import StatusTextSubmit from "./StatusTextSubmit";
 import SuccessBtn from "./Button/SuccessBtn";
 import { useModal } from "../contexts/ModalContext";
 
-function BookFormModal() {
-  const [titre, setTitre] = useState("");
-  const [auteur, setAuteur] = useState("");
-  const [parution, setParution] = useState("");
-  const [resume, setResume] = useState("");
-  const [couverture, setCouverture] = useState(null);
+function BookFormModal({ book }) {
+  const [titre, setTitre] = useState(book ? book.titre : "");
+  const [auteur, setAuteur] = useState(book ? book.auteur : "");
+  const [parution, setParution] = useState(book ? book.parution : "");
+  const [resume, setResume] = useState(book ? book.resume : "");
+  const [couverture, setCouverture] = useState(book ? book.couverture : null);
 
   //hook modal
   const { closeModal } = useModal();
@@ -20,16 +20,16 @@ function BookFormModal() {
   const [message, setMessage] = useState("");
   const [status, setStatus] = useState("");
 
-  //récupération du .POST pour créer livre
-  const { createBook } = useContext(BooksContext);
+  //récupération du .POST et .PUT pour créer/modifier le livre
+  const { createBook, updateBook } = useContext(BooksContext);
 
   //input file (couverture livre)
   const handleFileChange = (e) => {
     setCouverture(e.target.files[0]);
   };
 
-  // enregistre le livre dans la DB (published = false)
-  const handleSaveBook = async (event) => {
+  // enregistre OU modifie le livre dans la DB (published = true/false)
+  const handleSaveBook = async (event, published) => {
     event.preventDefault();
     if (!titre || !auteur || !parution || !resume || !couverture) {
       setStatus("error");
@@ -41,36 +41,17 @@ function BookFormModal() {
     formData.append("auteur", auteur);
     formData.append("parution", parution);
     formData.append("resume", resume);
-    formData.append("couverture", couverture);
-    formData.append("published", false);
-    formData.append("creation", true);
-    try {
-      await createBook(formData);
-      closeModal();
-    } catch (error) {
-      console.log(error);
-      setStatus("error");
-      setMessage("il y a eu un problème avec le soumission du formulaire");
+    if (couverture) {
+      formData.append("couverture", couverture);
     }
-  };
-  // enregistre le livre dans le DB (published = true)
-  const handleSaveAndPublish = async (event) => {
-    event.preventDefault();
-    if (!titre || !auteur || !parution || !resume || !couverture) {
-      setStatus("error");
-      setMessage("Veuillez remplir tous les champs");
-      return;
-    }
-    const formData = new FormData();
-    formData.append("titre", titre);
-    formData.append("auteur", auteur);
-    formData.append("parution", parution);
-    formData.append("resume", resume);
-    formData.append("couverture", couverture);
-    formData.append("published", true);
-    formData.append("creation", true);
+    formData.append("published", published);
+    formData.append("creation", "true");
     try {
-      await createBook(formData);
+      if (book) {
+        await updateBook(book._id, formData);
+      } else {
+        await createBook(formData);
+      }
       closeModal();
     } catch (error) {
       console.log(error);
@@ -143,10 +124,13 @@ function BookFormModal() {
         <StatusTextSubmit status={status} message={message} />
       </div>
       <div className="flex justify-end mt-2">
-        <SaveBookBtn value={"Enregistrer"} saveBook={handleSaveBook} />
+        <SaveBookBtn
+          value={"Enregistrer"}
+          saveBook={(event) => handleSaveBook(event)}
+        />
         <SuccessBtn
           value={"Enregistrer et publier"}
-          onClick={handleSaveAndPublish}
+          onClick={(event) => handleSaveBook(event, "true")}
         />
       </div>
     </form>

@@ -8,6 +8,8 @@ const BooksContext = createContext({
   createBook: () => {},
   deleteBook: () => {},
   publishBook: () => {},
+  unPublishBook: () => {},
+  updateBook: () => {},
 });
 
 export function BooksProvider({ children }) {
@@ -65,9 +67,49 @@ export function BooksProvider({ children }) {
     }
   };
 
+  //dépublie un created book (published === false)
+  const unPublishBook = async (_id) => {
+    try {
+      await axios.put(`http://localhost:5000/books/${_id}/publish`, {
+        published: false,
+      });
+      setBooks((prevBooks) =>
+        prevBooks.map((book) =>
+          book._id === _id ? { ...book, published: false } : book
+        )
+      );
+    } catch (error) {
+      console.log(`Erreur lors de la dépublication du livre : ${error}`);
+    }
+  };
+
+  //update un created book
+  const updateBook = async (_id, formData) => {
+    try {
+      const response = await axios.put(
+        `http://localhost:5000/books/${_id}`,
+        formData
+      );
+      setBooks((prevBooks) =>
+        prevBooks.map((book) => (book._id === _id ? response.data : book))
+      );
+    } catch (error) {
+      console.log(
+        `Une erreur est survenue lors de la mise à jour du livre : ${error}`
+      );
+    }
+  };
+
   return (
     <BooksContext.Provider
-      value={{ books, createBook, deleteBook, publishBook }}
+      value={{
+        books,
+        createBook,
+        deleteBook,
+        publishBook,
+        unPublishBook,
+        updateBook,
+      }}
     >
       {children}
     </BooksContext.Provider>

@@ -10,9 +10,11 @@ import WarningBtn from "../components/Button/WarningBtn";
 import { useModal } from "../contexts/ModalContext";
 import Bookinfo from "../components/Bookinfo";
 import StatusTextSubmit from "../components/StatusTextSubmit";
+import BookFormModal from "../components/BookFormModal";
 
 function MesCreations() {
-  const { books, deleteBook, publishBook } = useContext(BooksContext);
+  const { books, deleteBook, publishBook, unPublishBook } =
+    useContext(BooksContext);
   const { openModal, closeModal } = useModal();
 
   const createdBooks = books.filter((book) => book.creation === true);
@@ -53,14 +55,27 @@ function MesCreations() {
     openModal(<Bookinfo book={book} />);
   };
 
-  const handleModifyBtn = () => {
-    console.log("Modify");
+  const handleEditBtn = (book) => {
+    openModal(<BookFormModal book={book} />);
+  };
+
+  // gère le switch entre publier et dépublier le livre
+  const handlePublishBtn = (book) => {
+    if (book.published === false) {
+      publishBook(book._id);
+    } else {
+      unPublishBook(book._id);
+    }
+  };
+
+  const handleCreateBook = () => {
+    openModal(<BookFormModal />);
   };
 
   return (
     <div className="flex m-3">
       <ContentCard>
-        <CreateBookBtn />
+        <CreateBookBtn onClick={handleCreateBook} />
       </ContentCard>
       {createdBooks.map((book) => (
         <BookCard
@@ -77,11 +92,11 @@ function MesCreations() {
               value={<MdDeleteOutline className="text-xl" />}
             ></WarningBtn>
             <EditBookBtn
-              onClick={handleModifyBtn}
+              onClick={() => handleEditBtn(book)}
               value={<MdEdit className="className= text-xl" />}
             ></EditBookBtn>
             <SuccessBtn
-              onClick={() => publishBook(book._id)}
+              onClick={() => handlePublishBtn(book)}
               value={"Publier"}
             ></SuccessBtn>
           </div>

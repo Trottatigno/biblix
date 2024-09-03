@@ -1,7 +1,7 @@
 function LoadMoreBtn() {
   return (
     <div>
-      <button className="border-2 border-gray-400 rounded-full flex px-3 py-2">
+      <button className="border-2 border-gray-400 rounded-full flex px-3 py-2 cursor-pointer">
         Load More
       </button>
     </div>
