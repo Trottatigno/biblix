@@ -30,17 +30,23 @@ function MesFavoris() {
     favorites.some((favorite) => favorite._id === book._id)
   );
 
-  return (
-    <div className="flex flex-wrap gap-4 p-4">
-      {favoriteBooks.map((book) => (
+  function handleContent() {
+    if (favoriteBooks.length > 0) {
+      return favoriteBooks.map((book) => (
         <BookCard
           book={book}
           key={book._id}
           onClick={() => handleOpenModal(book)}
         />
-      ))}
-    </div>
-  );
+      ));
+    } else {
+      return (
+        <h1 className="text-2xl mt-5">Il n'y a aucun livre dans les favoris</h1>
+      );
+    }
+  }
+
+  return <div className="flex flex-wrap gap-4 p-4">{handleContent()}</div>;
 }
 
 export default MesFavoris;

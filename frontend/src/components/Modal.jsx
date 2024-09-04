@@ -18,11 +18,11 @@ function Modal({ openModal, closeModal, children }) {
 
   if (openModal) {
     return (
-      <div className="flex fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity justify-center items-center p-30 z-50">
-        <div
-          className="relative rounded-lg bg-gray-200 p-6 max-h-[80vh] overflow-y-auto 
-                        w-full max-w-xs sm:max-w-md md:max-w-lg lg:max-w-xl xl:max-w-2xl"
-        >
+      <div
+        className="flex fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity justify-center items-center p-30 z-50"
+        onClick={closeModal}
+      >
+        <div className="relative rounded-lg bg-gray-200 p-6 max-h-[80vh] overflow-y-auto w-full m-3 sm:m-10 lg:m-52">
           <div className="absolute top-3 right-3">
             <ExitBtn closeModal={closeModal} />
           </div>

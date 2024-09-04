@@ -14,7 +14,8 @@ function FavoriteBtn({ _id, btnDisplay }) {
     setIsFavorite(found);
   }, [favorites, _id]);
 
-  function handleClick() {
+  function handleClick(event) {
+    event.stopPropagation();
     if (!isFavorite) {
       addFavorite(_id);
     } else {

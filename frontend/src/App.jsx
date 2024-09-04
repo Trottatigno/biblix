@@ -9,13 +9,13 @@ function App() {
   return (
     <BooksProvider>
       <FavoritesProvider>
+        <Header />
         <ModalProvider>
-          <Header />
           <main>
             <AppRoutes />
           </main>
-          <Footer />
         </ModalProvider>
+        <Footer />
       </FavoritesProvider>
     </BooksProvider>
   );
